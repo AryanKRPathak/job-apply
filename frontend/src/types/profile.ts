@@ -22,4 +22,10 @@ export interface ResumeUploadResponse {
   extracted_text: string
   detected_skills: string[]
   filename: string
+  full_name: string
+  email: string
+  phone: string
+  years_exp: number | null
+  story: string
+  suggested_titles: string[]
 }

@@ -125,7 +125,17 @@ export default function ProfileSetup() {
     mutationFn: (file: File) => uploadResume(file),
     onSuccess: (data) => {
       setResumeResult(data)
-      setForm((f) => ({ ...f, skills: [...new Set([...f.skills, ...data.detected_skills])] }))
+      setForm((f) => ({
+        ...f,
+        // Only fill fields that are currently empty
+        full_name: f.full_name || data.full_name || f.full_name,
+        email: f.email || data.email || f.email,
+        phone: f.phone || data.phone || f.phone,
+        years_exp: f.years_exp || (data.years_exp ? String(data.years_exp) : f.years_exp),
+        story: f.story || data.story || f.story,
+        target_titles: f.target_titles.length > 0 ? f.target_titles : data.suggested_titles,
+        skills: [...new Set([...f.skills, ...data.detected_skills])],
+      }))
       toast.success(`Resume parsed — ${data.detected_skills.length} skills detected`)
     },
     onError: (e: Error) => toast.error(e.message),

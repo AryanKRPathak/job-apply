@@ -69,3 +69,9 @@ class ResumeUploadResponse(BaseModel):
     extracted_text: str
     detected_skills: list[str]
     filename: str
+    full_name: str = ""
+    email: str = ""
+    phone: str = ""
+    years_exp: int | None = None
+    story: str = ""
+    suggested_titles: list[str] = []
